@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+import argparse
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+p = argparse.ArgumentParser()
+p.add_argument("--freq", type=float, required=True, help="center frequency in Hz")
+p.add_argument("--rate", type=float, required=True, help="sample rate in Hz")
+p.add_argument("--file", default="iq.dat", help="path to raw IQ sample file (used for the spectrogram)")
+p.add_argument("--psd-file", default="psd.dat", help="path to precomputed PSD file (freq_hz, power_db columns)")
+args = p.parse_args()
+
+# raw interleaved float32 I/Q - written by both python/capture_psd.py and
+# cpp/main.cpp, so complex64 (2x float32) parses either one directly
+samples = np.fromfile(args.file, dtype=np.complex64)
+
+# precomputed by the capture program (compute_psd() / computePSD()) - just plot it
+freq_hz, power_db = np.loadtxt(args.psd_file, unpack=True)
+
+fig, (ax_psd, ax_spec) = plt.subplots(2, 1, figsize=(10, 8))
+
+ax_psd.plot(freq_hz / 1e6, power_db)
+ax_psd.set_xlabel("Frequency (MHz)")
+ax_psd.set_ylabel("PSD (dB/Hz)")
+ax_psd.set_title(f"PSD @ {args.freq/1e6:.3f} MHz, {args.rate/1e6:.3f} Msps")
+
+ax_spec.specgram(samples, NFFT=1024, Fs=args.rate / 1e6, Fc=args.freq / 1e6)
+ax_spec.set_xlabel("Time (s)")
+ax_spec.set_ylabel("Frequency (MHz)")
+ax_spec.set_title("Spectrogram")
+
+fig.tight_layout()
+out = "plot.png"
+fig.savefig(out, dpi=150)
+print(f"saved {out} ({len(samples)} samples)")

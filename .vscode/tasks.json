@@ -3,9 +3,9 @@
         {
             "type": "shell",
             "command": [
-                "./test.sh"
+                "./scripts/restart_rtl_server.sh && ./python/test.sh"
             ]  ,
-            "label": "Test"
+            "label": "PythonTest"
         },
         {
             "type": "shell",
@@ -16,8 +16,31 @@
                 "pip install numpy scipy matplotlib -q && ",
                 "python -c 'import numpy, scipy, matplotlib; print('ok', numpy.__version__, scipy.__version__, matplotlib.__version__)'"
             ]  ,
-            "label": "Setup"
+            "label": "PythonSetup"
             
+        },
+        {
+            "type": "shell",
+            "command": [
+                "./scripts/restart_rtl_server.sh && ./cpp/test.sh"
+            ]  ,
+            "label": "CppTest"
+        },
+        {
+            "type": "shell",
+            "command": [
+                "source venv/bin/activate && python3 -c \"import numpy as np; print(np.fromfile('iq.dat', dtype=np.complex64)[:${input:previewsize}])\""
+            ],
+            "label": "Preview iq.dat"
+        
+        }
+    ],
+    "inputs": [
+        {
+            "id": "previewsize",
+            "default": "20",
+            "type": "promptString",
+            "description": "Enter size for IQ preview"
         }
     ]
 }
