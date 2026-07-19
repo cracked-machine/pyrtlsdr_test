@@ -1,0 +1,23 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "command": [
+                "./test.sh"
+            ]  ,
+            "label": "Test"
+        },
+        {
+            "type": "shell",
+            "command": [
+                "python3 -m venv venv && ",
+                "source venv/bin/activate && ",
+                "pip install --upgrade pip -q && ",
+                "pip install numpy scipy matplotlib -q && ",
+                "python -c 'import numpy, scipy, matplotlib; print('ok', numpy.__version__, scipy.__version__, matplotlib.__version__)'"
+            ]  ,
+            "label": "Setup"
+            
+        }
+    ]
+}
