@@ -3,7 +3,14 @@
         {
             "type": "shell",
             "command": [
-                "./scripts/restart_rtl_server.sh && ./python/test.sh"
+                "./scripts/restart_rtl_server.sh"
+            ]  ,
+            "label": "Restart RTL TCP Server."
+        },
+        {
+            "type": "shell",
+            "command": [
+                "./scripts/test_python.sh ${input:serverip}"
             ]  ,
             "label": "PythonTest"
         },
@@ -14,7 +21,7 @@
                 "source venv/bin/activate && ",
                 "pip install --upgrade pip -q && ",
                 "pip install numpy scipy matplotlib -q && ",
-                "python -c 'import numpy, scipy, matplotlib; print('ok', numpy.__version__, scipy.__version__, matplotlib.__version__)'"
+                "python -c \"import numpy, scipy, matplotlib; print('ok', numpy.__version__, scipy.__version__, matplotlib.__version__)\""
             ]  ,
             "label": "PythonSetup"
             
@@ -22,7 +29,7 @@
         {
             "type": "shell",
             "command": [
-                "./scripts/restart_rtl_server.sh && ./cpp/test.sh"
+                "./scripts/test_cpp.sh ${input:serverip}"
             ]  ,
             "label": "CppTest"
         },
@@ -36,6 +43,12 @@
         }
     ],
     "inputs": [
+        {
+            "id": "serverip",
+            "default": "127.0.0.1",
+            "type": "promptString",
+            "description": "Enter IP address for the server running rtl_tcp"
+        },
         {
             "id": "previewsize",
             "default": "20",
