@@ -12,6 +12,7 @@ import struct
 
 import numpy as np
 
+# See https://github.com/osmocom/rtl-sdr/blob/master/src/rtl_tcp.c
 _CMD_SET_FREQ = 0x01
 _CMD_SET_SAMPLE_RATE = 0x02
 _CMD_SET_GAIN_MODE = 0x03
@@ -79,9 +80,15 @@ class RtlTcpClient:
 
     def read_samples(self, num_samples):
         """Read num_samples IQ samples, returned as complex64 in [-1, 1)."""
+
+        # IQ is two interleaved bytes so we need twice as much data. 
+        # This gives us interleaved I and Q values.
         raw = self._recv_exact(num_samples * 2)
+        # Tell numpy the bytes format and then convert into format that can wrap and hold fract values
         iq = np.frombuffer(raw, dtype=np.uint8).astype(np.float32)
+        # recenter and scale
         iq = (iq - 127.5) / 127.5
+        # deinterleave the raw array into NDArray[complex128]
         return iq[0::2] + 1j * iq[1::2]
 
     def close(self):

@@ -15,6 +15,6 @@ if ! pgrep -a rtl_tcp; then
     exit 1
 fi
 
-source venv/bin/activate && python capture_psd.py --freq 100e6 --rate 2.4e6 --n 2000000 2>&1
+source venv/bin/activate && python python/capture_psd.py --freq 100e6 --rate 2.4e6 --n 2000000 2>&1
 
 kill $(pgrep -a rtl_tcp) 2>/dev/null; echo "stopped test rtl_tcp instance"
