@@ -10,6 +10,7 @@
         {
             "type": "shell",
             "command": [
+                "./scripts/restart_rtl_server.sh && ",
                 "./scripts/test_python.sh ${input:serverip}"
             ]  ,
             "label": "PythonTest"
@@ -29,6 +30,7 @@
         {
             "type": "shell",
             "command": [
+                "./scripts/restart_rtl_server.sh && ",
                 "./scripts/test_cpp.sh ${input:serverip}"
             ]  ,
             "label": "CppTest"

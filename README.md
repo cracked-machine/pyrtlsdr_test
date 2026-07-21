@@ -23,7 +23,9 @@ This receives IQ data streamed from an RT-SDR dongle over TCP (using rtl-tcp) an
     ```
 
 1. Run `scripts/restart_rtl_server.sh` on the server. Check for errors.
-1. Run `scripts/test_cpp.sh` or `scripts/test_python.sh` on the client.
+1. Run `scripts/test_cpp.sh <SERVERIP>` or `scripts/test_python.sh <SERVERIP>` on the client.
+
+NOTE: You can stop the RTL server with `kill $(pgrep -a rtl_tcp)`
 
 ----
 
