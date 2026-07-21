@@ -33,7 +33,7 @@ NOTE: You can stop the RTL server with `kill $(pgrep -a rtl_tcp)`
 
 ## Spectral Leakage
 
-Post processing of the FFT bins with a hann window will improve the clarity of the PSD plot. Without the window each bin's sinc-shaped response has slowly-decaying sidelobs, so energy from a strong signal smears into neighbouring bins. Adding the window increases the side-lobe decay which allows the the true shape of the spectrum to come through more clearly. _You may need to zoom into see the difference_.
+Post processing of the FFT bins with a hann window will improve the clarity of the PSD plot. Without the window each bin's sinc-shaped response has slowly-decaying sidelobs, so energy from a strong signal smears into neighbouring bins. Multiplying each bin with the window increases the side-lobe decay which allows the the true shape of the spectrum to come through more clearly. _You may need to zoom into see the difference_.
 
 |Without Hann Window|With Hann Window|
 |-|-|
