@@ -41,7 +41,12 @@ Post processing of the FFT bins with a hann window will improve the clarity of t
 
 ## Noise Floor
 
-A standard periodogram provides an inconsistent estimate with high variance, making the resulting spectrum look jagged and noisy. We use Welch's method to reduce the random "noise" and variance inherent in standard periodograms by splitting the signal into overlapping N-sample segments (50% overlap), each Hann-windowed and FFT'd. Finally the power spectra are averaged before converting to dB. More segments equals less noisy noise floor, at the cost of frequency resolution (bin width becomes sampleRate/N instead of sampleRate/n).
+A standard periodogram provides an inconsistent estimate with high variance, making the resulting spectrum look jagged and noisy. We use Welch's method to reduce the random "noise" and variance inherent in standard periodograms by
+
+- Splitting the signal into overlapping N-sample segments (50% overlap)
+- Calculate the average power spectra for each bin across the whole FFT range.
+
+More segments equals less noisy noise floor, at the cost of frequency resolution (bin width becomes sampleRate/N instead of sampleRate/n).
 
 Note: `--nfft N` enables Welch's method.
 
