@@ -13,7 +13,31 @@
                 "./scripts/restart_rtl_server.sh && ",
                 "./examples/fft/test_python.sh ${input:serverip}"
             ]  ,
-            "label": "PythonTest"
+            "label": "FFT: Python"
+        },
+        {
+            "type": "shell",
+            "command": [
+                "./scripts/restart_rtl_server.sh && ",
+                "./examples/fm_demod/test_python.sh ${input:serverip}"
+            ]  ,
+            "label": "FM Demod: Python"
+        },
+        {
+            "type": "shell",
+            "command": [
+                "./scripts/restart_rtl_server.sh && ",
+                "./examples/fft/test_cpp.sh ${input:serverip}"
+            ]  ,
+            "label": "FFT: Cpp"
+        },
+        {
+            "type": "shell",
+            "command": [
+                "./scripts/restart_rtl_server.sh && ",
+                "./examples/fm_demod/test_cpp.sh ${input:serverip}"
+            ]  ,
+            "label": "FM Demod: Cpp"
         },
         {
             "type": "shell",
@@ -26,14 +50,6 @@
             ]  ,
             "label": "PythonSetup"
             
-        },
-        {
-            "type": "shell",
-            "command": [
-                "./scripts/restart_rtl_server.sh && ",
-                "./examples/fft/test_cpp.sh ${input:serverip}"
-            ]  ,
-            "label": "CppTest"
         },
         {
             "type": "shell",

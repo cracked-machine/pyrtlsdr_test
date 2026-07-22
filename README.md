@@ -23,7 +23,7 @@ This receives IQ data streamed from an RT-SDR dongle over TCP (using rtl-tcp) an
     ```
 
 1. Run `scripts/restart_rtl_server.sh` on the server. Check for errors.
-1. Run `scripts/test_cpp.sh <SERVERIP>` or `scripts/test_python.sh <SERVERIP>` on the client.
+1. Run one of the examples on the client.
 
 NOTE: You can stop the RTL server with `kill $(pgrep -a rtl_tcp)`
 
@@ -53,3 +53,17 @@ Note: `--nfft N` enables Welch's method.
 |Without Welch's Method|With Welch's Method|
 |-|-|
 |![](without_welch_plot.png)|![](with_hann_plot.png)|
+
+---
+
+# FM Demodulation
+
+1. Receive the IQ samples from the RTL SDR at an offset so to avoid the SDR's DC spike.
+2. Mix it down to baseband to remove the offset.
+3. Use a low-pass filter to isolate the FM channel and reject everything else
+4. Decimate down to a sane rate for demodulation
+5. FM demodulate
+6. Resample from the demod rate down to a standard audio rate
+7. Save as raw float32 PCM so it can be played back
+
+![alt text](fm_demof_waveform.png)
