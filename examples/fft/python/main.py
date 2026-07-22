@@ -9,7 +9,7 @@ import argparse
 
 import numpy as np
 
-from rtltcp import RtlTcpClient
+from examples.common.python.rtltcp import RtlTcpClient
 
 
 def compute_psd(iq, sample_rate, center_freq_hz, nfft=None):

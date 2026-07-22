@@ -11,7 +11,7 @@
             "type": "shell",
             "command": [
                 "./scripts/restart_rtl_server.sh && ",
-                "./fft/test_python.sh ${input:serverip}"
+                "./examples/fft/test_python.sh ${input:serverip}"
             ]  ,
             "label": "PythonTest"
         },
@@ -31,7 +31,7 @@
             "type": "shell",
             "command": [
                 "./scripts/restart_rtl_server.sh && ",
-                "./fft/test_cpp.sh ${input:serverip}"
+                "./examples/fft/test_cpp.sh ${input:serverip}"
             ]  ,
             "label": "CppTest"
         },
