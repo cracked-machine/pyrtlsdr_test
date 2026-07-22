@@ -4,8 +4,8 @@ SERVERIP="${1}"
 
 rm -f iq.dat psd.dat plot.png
 
-SRC="cpp"
-BUILD="cpp/build"
+SRC="fft/cpp"
+BUILD="fft/cpp/build"
 
 g++ ${SRC}/main.cpp ${SRC}/rtltcp.cpp -o ${BUILD}/client
 chmod +x ${BUILD}/client  
